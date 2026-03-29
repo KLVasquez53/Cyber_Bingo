@@ -1,34 +1,93 @@
 // ============================================
-// BINGO CALLER WITH PLAYER BOARDS
+// LOTERIA CALLER WITH PLAYER BOARDS
 // JavaScript Implementation
 // ============================================
 
+const LOTERIA_DECK = [
+    { id: 1, name: 'El Gallo' },
+    { id: 2, name: 'El Diablito' },
+    { id: 3, name: 'La Dama' },
+    { id: 4, name: 'El Catrin' },
+    { id: 5, name: 'El Paraguas' },
+    { id: 6, name: 'La Sirena' },
+    { id: 7, name: 'La Escalera' },
+    { id: 8, name: 'La Botella' },
+    { id: 9, name: 'El Barril' },
+    { id: 10, name: 'El Arbol' },
+    { id: 11, name: 'El Melon' },
+    { id: 12, name: 'El Valiente' },
+    { id: 13, name: 'El Gorrito' },
+    { id: 14, name: 'La Muerte' },
+    { id: 15, name: 'La Pera' },
+    { id: 16, name: 'La Bandera' },
+    { id: 17, name: 'El Bandolon' },
+    { id: 18, name: 'El Violoncello' },
+    { id: 19, name: 'La Garza' },
+    { id: 20, name: 'El Pajaro' },
+    { id: 21, name: 'La Mano' },
+    { id: 22, name: 'La Bota' },
+    { id: 23, name: 'La Luna' },
+    { id: 24, name: 'El Cotorro' },
+    { id: 25, name: 'El Borracho' },
+    { id: 26, name: 'El Negrito' },
+    { id: 27, name: 'El Corazon' },
+    { id: 28, name: 'La Sandia' },
+    { id: 29, name: 'El Tambor' },
+    { id: 30, name: 'El Camaron' },
+    { id: 31, name: 'Las Jaras' },
+    { id: 32, name: 'El Musico' },
+    { id: 33, name: 'La Arana' },
+    { id: 34, name: 'El Soldado' },
+    { id: 35, name: 'La Estrella' },
+    { id: 36, name: 'El Cazo' },
+    { id: 37, name: 'El Mundo' },
+    { id: 38, name: 'El Apache' },
+    { id: 39, name: 'El Nopal' },
+    { id: 40, name: 'El Alacran' },
+    { id: 41, name: 'La Rosa' },
+    { id: 42, name: 'La Calavera' },
+    { id: 43, name: 'La Campana' },
+    { id: 44, name: 'El Cantarito' },
+    { id: 45, name: 'El Venado' },
+    { id: 46, name: 'El Sol' },
+    { id: 47, name: 'La Corona' },
+    { id: 48, name: 'La Chalupa' },
+    { id: 49, name: 'El Pino' },
+    { id: 50, name: 'El Pescado' },
+    { id: 51, name: 'La Palma' },
+    { id: 52, name: 'La Maceta' },
+    { id: 53, name: 'El Arpa' },
+    { id: 54, name: 'La Rana' }
+];
+
 class PlayerBoard {
-    constructor(playerId) {
+    constructor(playerId, deck) {
         this.playerId = playerId;
+        this.deck = deck;
         this.cards = this.generateBoard();
         this.marked = new Set();
         this.hasWon = false;
     }
     
     generateBoard() {
-        // Generate a 4x4 grid with random numbers 1-54
+        // Generate a 4x4 grid with random Loteria cards.
         const board = [];
-        const used = new Set();
+        const usedCardIds = new Set();
         
         while (board.length < 16) {
-            const num = Math.floor(Math.random() * 54) + 1;
-            if (!used.has(num)) {
-                board.push(num);
-                used.add(num);
+            const randomIndex = Math.floor(Math.random() * this.deck.length);
+            const card = this.deck[randomIndex];
+            if (!usedCardIds.has(card.id)) {
+                board.push(card.id);
+                usedCardIds.add(card.id);
             }
         }
         return board;
     }
     
-    markNumber(num) {
-        if (this.cards.includes(num)) {
-            this.marked.add(num);
+    markCard(cardId) {
+        if (this.cards.includes(cardId)) {
+            this.marked.add(cardId);
             return true;
         }
         return false;
@@ -88,11 +147,11 @@ class PlayerBoard {
 
 class BingoCaller {
     constructor() {
-        // Initialize the deck with 54 cards (1-54)
-        this.playingCards = Array.from({ length: 54 }, (_, i) => i + 1);
+        // Initialize the deck with 54 Loteria cards.
+        this.playingCards = [...LOTERIA_DECK];
         this.used = new Array(this.playingCards.length).fill(false);
-        this.calledNumbers = [];
-        this.currentNumber = null;
+        this.calledCards = [];
+        this.currentCard = null;
         this.cardsCalledCount = 0;
         this.players = new Map();
         this.nextPlayerId = 1;
@@ -120,7 +179,7 @@ class BingoCaller {
     }
     
     setupEventListeners() {
-        // Play button now calls a new number each time (continuous calling)
+        // Play button calls a new Loteria card each press.
         this.playBtn.addEventListener('click', () => this.playRound());
         this.stopBtn.addEventListener('click', () => this.stopGame());
         this.resetBtn.addEventListener('click', () => this.resetGame());
@@ -145,7 +204,7 @@ class BingoCaller {
     }
     
     /**
-     * Get a random number from the available cards
+     * Get a random card from the available deck.
      */
     getRandomCard() {
         if (this.cardsCalledCount >= this.playingCards.length) {
@@ -162,7 +221,7 @@ class BingoCaller {
     }
     
     /**
-     * Play one round - call the next number (called each time PLAY is pressed)
+     * Play one round - call the next card each time PLAY is pressed.
      */
     playRound() {
         if (this.cardsCalledCount >= this.playingCards.length) {
@@ -173,21 +232,21 @@ class BingoCaller {
         
         this.gameMessage.textContent = 'Game in progress...';
         
-        // Get next random number
-        const newNumber = this.getRandomCard();
+        // Get next random card.
+        const newCard = this.getRandomCard();
         
-        if (newNumber !== null) {
-            this.currentNumber = newNumber;
+        if (newCard !== null) {
+            this.currentCard = newCard;
             this.cardsCalledCount++;
-            this.calledNumbers.push(newNumber);
+            this.calledCards.push(newCard);
             
             // Update displays
             this.updateCurrentNumberDisplay();
             this.updateCardCountDisplay();
             this.updateCalledNumbersList();
             
-            // Mark this number on all player boards
-            this.markNumberOnAllBoards(newNumber);
+            // Mark this card on all player boards.
+            this.markCardOnAllBoards(newCard.id);
             
             // Check for winners
             this.checkForWinners();
@@ -195,11 +254,11 @@ class BingoCaller {
     }
     
     /**
-     * Mark a number on all player boards and update UI
+     * Mark a card on all player boards and update UI.
      */
-    markNumberOnAllBoards(num) {
+    markCardOnAllBoards(cardId) {
         this.players.forEach((player, playerId) => {
-            const marked = player.markNumber(num);
+            const marked = player.markCard(cardId);
             if (marked) {
                 this.updatePlayerBoardUI(playerId);
             }
@@ -241,10 +300,10 @@ class BingoCaller {
      * Reset the game to initial state
      */
     resetGame() {
-        this.playingCards = Array.from({ length: 54 }, (_, i) => i + 1);
+        this.playingCards = [...LOTERIA_DECK];
         this.used = new Array(this.playingCards.length).fill(false);
-        this.calledNumbers = [];
-        this.currentNumber = null;
+        this.calledCards = [];
+        this.currentCard = null;
         this.cardsCalledCount = 0;
         this.players.clear();
         this.nextPlayerId = 1;
@@ -264,7 +323,7 @@ class BingoCaller {
      */
     addPlayer() {
         const playerId = this.nextPlayerId++;
-        const playerBoard = new PlayerBoard(playerId);
+        const playerBoard = new PlayerBoard(playerId, this.playingCards);
         this.players.set(playerId, playerBoard);
         
         this.createPlayerBoardUI(playerId, playerBoard);
@@ -288,17 +347,13 @@ class BingoCaller {
         gridDiv.className = 'player-grid';
         gridDiv.id = `grid-${playerId}`;
         
-        playerBoard.cards.forEach((num, index) => {
+        playerBoard.cards.forEach((cardId, index) => {
+            const card = this.getCardById(cardId);
             const cell = document.createElement('div');
             cell.className = 'player-cell';
             cell.id = `cell-${playerId}-${index}`;
-            cell.textContent = num;
-            cell.dataset.number = num;
-            
-            // Allow manual marking (optional)
-            cell.addEventListener('click', () => {
-                cell.classList.toggle('player-marked');
-            });
+            cell.innerHTML = `<span class="player-card-name">${card.name}</span>`;
+            cell.dataset.cardId = String(cardId);
             
             gridDiv.appendChild(cell);
         });
@@ -313,9 +368,9 @@ class BingoCaller {
     updatePlayerBoardUI(playerId) {
         const player = this.players.get(playerId);
         
-        player.cards.forEach((num, index) => {
+        player.cards.forEach((cardId, index) => {
             const cell = document.getElementById(`cell-${playerId}-${index}`);
-            if (cell && player.marked.has(num)) {
+            if (cell && player.marked.has(cardId)) {
                 cell.classList.add('player-marked');
             }
         });
@@ -325,7 +380,7 @@ class BingoCaller {
      * Update the current number display
      */
     updateCurrentNumberDisplay() {
-        this.currentNumberDisplay.textContent = this.currentNumber;
+        this.currentNumberDisplay.textContent = this.currentCard ? this.currentCard.name : '-';
         this.currentNumberDisplay.classList.add('pulse');
         setTimeout(() => {
             this.currentNumberDisplay.classList.remove('pulse');
@@ -343,12 +398,16 @@ class BingoCaller {
      * Update the list of called numbers
      */
     updateCalledNumbersList() {
-        this.calledNumbersList.innerHTML = this.calledNumbers
-            .map(num => `<span class="called-number">${num}</span>`)
+        this.calledNumbersList.innerHTML = this.calledCards
+            .map(card => `<span class="called-number">${card.name}</span>`)
             .join('');
         
         // Scroll to show the latest number
         this.calledNumbersList.scrollLeft = this.calledNumbersList.scrollWidth;
+    }
+
+    getCardById(cardId) {
+        return this.playingCards.find((card) => card.id === cardId);
     }
 }
 

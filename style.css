@@ -173,12 +173,14 @@ body {
 }
 
 .number-box {
-    font-size: 6em;
+    font-size: 2.4em;
     font-weight: bold;
     color: #ff007f;
     text-shadow: 0 0 20px #ff007f;
-    min-width: 200px;
-    line-height: 1;
+    min-width: 300px;
+    max-width: 520px;
+    line-height: 1.2;
+    word-break: break-word;
 }
 
 .number-box.pulse {
@@ -283,7 +285,7 @@ body {
 
 .called-numbers {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 10px;
     max-height: 150px;
     overflow-y: auto;
@@ -298,7 +300,8 @@ body {
     text-align: center;
     color: #ff7f7f;
     font-weight: bold;
-    font-size: 0.95em;
+    font-size: 0.85em;
+    line-height: 1.2;
     transition: all 0.2s ease;
 }
 
@@ -429,11 +432,20 @@ body {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-size: 0.9em;
-    min-height: 45px;
+    font-size: 0.72em;
+    line-height: 1.2;
+    min-height: 58px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.player-card-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .player-cell:hover {

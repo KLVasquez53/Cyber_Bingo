@@ -10,7 +10,17 @@ public class Main {
 
 int[] playingCards =
         {
-        1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54
+        "El Gallo", "El Diablito", "La Dama", "El Catrín", "El Paraguas", 
+            "La Sirena", "La Escalera", "La Botella", "El Barril", "El Árbol",
+            "El Melón", "El Valiente", "El Gorrito", "La Muerte", "La Pera",
+            "La Bandera", "El Bandolón", "El Violoncello", "La Garza", "El Pájaro",
+            "La Mano", "La Bota", "La Luna", "El Cotorro", "El Borracho", 
+            "El Negrito", "El Corazón", "La Sandía", "El Tambor", "El Camarón",
+            "Las Jaras", "El Músico", "La Araña", "La Canoa", "El Pino", 
+            "El Pescado", "La Palma", "La Maceta", "El Arpa", "La Rana",
+            "La Serepiente", "El Venado", "La Campana", "El Cantarito", "El Sol",
+            "La Corona", "La Chalupa", "El Pino", "El Pescado", "La Palma", 
+            "La Maceta", "El Arpa", "La Rana"
 };
 
 boolean [] used =new boolean[playingCards.length];
