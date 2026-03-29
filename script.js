@@ -359,7 +359,11 @@ class BingoCaller {
             const cell = document.createElement('div');
             cell.className = 'player-cell';
             cell.id = `cell-${playerId}-${index}`;
-            cell.innerHTML = `<span class="player-card-name">${card.name}</span>`;
+            const img = document.createElement('img');
+            img.src = `../loteriaCards/${cardId}.png`;
+            img.alt = card.name;
+            img.className = 'card-image';
+            cell.appendChild(img);
             cell.dataset.cardId = String(cardId);
             
             gridDiv.appendChild(cell);
