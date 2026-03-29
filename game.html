@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cyberpunk Loteria</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="game-container">
+            <div class="grid">
+                <!-- 16 cells -->
+                <div class="cell" id="cell1"></div>
+                <div class="cell" id="cell2"></div>
+                <div class="cell" id="cell3"></div>
+                <div class="cell" id="cell4"></div>
+                <div class="cell" id="cell5"></div>
+                <div class="cell" id="cell6"></div>
+                <div class="cell" id="cell7"></div>
+                <div class="cell" id="cell8"></div>
+                <div class="cell" id="cell9"></div>
+                <div class="cell" id="cell10"></div>
+                <div class="cell" id="cell11"></div>
+                <div class="cell" id="cell12"></div>
+                <div class="cell" id="cell13"></div>
+                <div class="cell" id="cell14"></div>
+                <div class="cell" id="cell15"></div>
+                <div class="cell" id="cell16"></div>
+            </div>
+            
+            <!-- Settings Button -->
+            <button id="settingsButton" class="cyberpunk-btn settings-corner">⚙</button>
+
+            <!-- Settings Menu -->
+            <div id="settingsMenu" class="settings-menu">
+                
+                <h2 id="settingsName">Settings</h2>
+                <button id="resumeButton" class="cyberpunk-btn">Resume</button>
+                <button id="restartButton" class="cyberpunk-btn">Restart</button>
+                <button id="quitButton" class="cyberpunk-btn">Quit</button>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+        <!-- Random Number Generator -->
+        <button id="randomBtn" class="cyberpunk-btn">Generate Random Number</button>
+        <p id="randomResult"></p>
+    </body>
+</html>

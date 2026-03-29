@@ -1,0 +1,136 @@
+/* Game Page & Grid */
+.game-container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    gap: 10px;
+    justify-content: center;
+}
+
+.cell {
+    background: rgba(0, 0, 0, 0.05);
+    border: 2px solid #0ff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0ff;
+    font-size: 1.2em;
+    cursor: pointer;
+    position: relative;
+}
+
+.cell:hover {
+    box-shadow: 0 0 10px #00f0ff;
+}
+
+/* crosses box off */
+.cell.marked::after {
+    content: "❌";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #ff007f;
+}
+
+/* Cyberpunk Button */
+.cyberpunk-btn {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid #0ff;
+    color: #0ff;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+}
+
+.cyberpunk-btn:hover {
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+}
+
+/* Settings Button in top-right corner */
+.settings-corner {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5em;
+    padding: 10px 12px;
+}
+
+/* Settings Menu */
+.settings-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: rgba(46, 46, 46, 0.95);
+    border: 2px solid #0ff;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.settings-menu.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.settings-menu button {
+    display: block;
+    margin: 10px auto;
+    width: 120px;
+}
+
+#homePage {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#gameTitle {
+    font-size: 5em;
+    margin-bottom: 20px;
+    color: #0ff;
+    text-align: center;
+    padding: 50px 50px;
+}
+
+#playButton {
+  padding: 25px 50px;  
+  font-size: 2rem;
+}
+
+body {
+    background: rgb(46, 46, 46);
+}
+
+#settingsName {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: rgb(255, 255, 255);
+}
+
+@keyframes pulse {
+    0%  { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
