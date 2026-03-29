@@ -104,7 +104,7 @@ class PlayerBoard {
                     break;
                 }
             }
-            if (isComplete) return true;
+            if (isComplete) return { won: true, type: 'horizontal', line: row + 1 };
         }
         
         // Check columns
@@ -117,7 +117,7 @@ class PlayerBoard {
                     break;
                 }
             }
-            if (isComplete) return true;
+            if (isComplete) return { won: true, type: 'vertical', line: col + 1 };
         }
         
         // Check diagonals
@@ -129,7 +129,7 @@ class PlayerBoard {
                 break;
             }
         }
-        if (diag1) return true;
+        if (diag1) return { won: true, type: 'diagonal', line: 1 };
         
         let diag2 = true;
         for (let i = 0; i < 4; i++) {
@@ -139,9 +139,9 @@ class PlayerBoard {
                 break;
             }
         }
-        if (diag2) return true;
+        if (diag2) return { won: true, type: 'diagonal', line: 2 };
         
-        return false;
+        return { won: false };
     }
 }
 
@@ -270,9 +270,10 @@ class BingoCaller {
      */
     checkForWinners() {
         this.players.forEach((player, playerId) => {
-            if (!player.hasWon && player.checkBingo()) {
+            const winResult = player.checkBingo();
+            if (!player.hasWon && winResult.won) {
                 player.hasWon = true;
-                this.announceWinner(playerId);
+                this.announceWinner(playerId, winResult);
             }
         });
     }
@@ -280,9 +281,14 @@ class BingoCaller {
     /**
      * Announce a winner
      */
-    announceWinner(playerId) {
-        this.gameMessage.textContent = `🎉 PLAYER ${playerId} WINS! BINGO! 🎉`;
+    announceWinner(playerId, winResult) {
+        this.gameMessage.textContent = `WINNER: Player ${playerId}! 4 in a row (${winResult.type}).`;
         this.gameMessage.style.color = '#ffff00';
+
+        // Stop additional calls after a winner is found.
+        this.playBtn.disabled = true;
+        this.stopBtn.disabled = true;
+
         const boardElement = document.getElementById(`player-board-${playerId}`);
         if (boardElement) {
             boardElement.classList.add('winner');
@@ -309,6 +315,7 @@ class BingoCaller {
         this.nextPlayerId = 1;
         
         this.playBtn.disabled = false;
+        this.stopBtn.disabled = true;
         this.currentNumberDisplay.textContent = '-';
         this.cardCountDisplay.textContent = '0';
         this.gameMessage.textContent = 'Game reset! Add players to start.';
