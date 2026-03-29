@@ -1,49 +1,65 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cyberpunk Loteria</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div class="game-container">
-            <div class="grid">
-                <!-- 16 cells -->
-                <div class="cell" id="cell1"></div>
-                <div class="cell" id="cell2"></div>
-                <div class="cell" id="cell3"></div>
-                <div class="cell" id="cell4"></div>
-                <div class="cell" id="cell5"></div>
-                <div class="cell" id="cell6"></div>
-                <div class="cell" id="cell7"></div>
-                <div class="cell" id="cell8"></div>
-                <div class="cell" id="cell9"></div>
-                <div class="cell" id="cell10"></div>
-                <div class="cell" id="cell11"></div>
-                <div class="cell" id="cell12"></div>
-                <div class="cell" id="cell13"></div>
-                <div class="cell" id="cell14"></div>
-                <div class="cell" id="cell15"></div>
-                <div class="cell" id="cell16"></div>
-            </div>
-            
-            <!-- Settings Button -->
-            <button id="settingsButton" class="cyberpunk-btn settings-corner">⚙</button>
-
-            <!-- Settings Menu -->
-            <div id="settingsMenu" class="settings-menu">
-                
-                <h2 id="settingsName">Settings</h2>
-                <button id="resumeButton" class="cyberpunk-btn">Resume</button>
-                <button id="restartButton" class="cyberpunk-btn">Restart</button>
-                <button id="quitButton" class="cyberpunk-btn">Quit</button>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Loteria - Bingo Caller</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="caller-container">
+        <h1>🎰 BINGO CALLER 🎰</h1>
+        
+        <!-- Current Called Number Display -->
+        <div class="current-number-display">
+            <p class="label">Current Number:</p>
+            <div class="number-box" id="currentNumber">-</div>
+        </div>
+        
+        <!-- Game Status -->
+        <div class="game-status">
+            <p>Cards Called: <span id="cardsCalled">0</span> / 54</p>
+            <p id="gameMessage">Thank you for joining us in Loteria!</p>
+        </div>
+        
+        <!-- Control Buttons -->
+        <div class="button-group">
+            <button id="playBtn" class="cyberpunk-btn btn-play">▶ PLAY</button>
+            <button id="stopBtn" class="cyberpunk-btn btn-stop" disabled>⏸ STOP</button>
+            <button id="resetBtn" class="cyberpunk-btn btn-reset">🔄 RESET</button>
+        </div>
+        
+        <!-- Called Numbers Display -->
+        <div class="called-numbers-container">
+            <h3>Called Numbers</h3>
+            <div class="called-numbers" id="calledNumbersList">
+                <!-- Called numbers will appear here -->
             </div>
         </div>
 
-        <script src="script.js"></script>
-        <!-- Random Number Generator -->
-        <button id="randomBtn" class="cyberpunk-btn">Generate Random Number</button>
-        <p id="randomResult"></p>
-    </body>
+        <!-- Player Board Section -->
+        <div class="player-section">
+            <div class="player-controls">
+                <button id="addPlayerBtn" class="cyberpunk-btn btn-add-player">➕ Add Player</button>
+                <span id="playerCount">Players: 0</span>
+            </div>
+            <div class="players-grid" id="playersGrid">
+                <!-- Player boards will be added here -->
+            </div>
+        </div>
+        
+        <!-- Settings Button -->
+        <button id="settingsButton" class="cyberpunk-btn settings-corner">⚙</button>
+
+        <!-- Settings Menu -->
+        <div id="settingsMenu" class="settings-menu">
+            <h2>Settings</h2>
+            <button id="resumeButton" class="cyberpunk-btn">Resume</button>
+            <button id="restartButton" class="cyberpunk-btn">Restart</button>
+            <button id="quitButton" class="cyberpunk-btn">Quit to Home</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>

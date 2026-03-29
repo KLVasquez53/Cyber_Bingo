@@ -134,3 +134,342 @@ body {
     100% { transform: scale(1); }
 }
 
+/* ============================================
+   BINGO CALLER STYLES
+   ============================================ */
+
+.caller-container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 30px;
+}
+
+.caller-container h1 {
+    font-size: 3.5em;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #ff007f;
+    margin: 20px 0;
+}
+
+/* Current Number Display */
+.current-number-display {
+    text-align: center;
+    background: rgba(0, 240, 255, 0.05);
+    border: 3px solid #0ff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 0 20px #0ff, inset 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+.current-number-display .label {
+    font-size: 1.2em;
+    color: #0ff;
+    margin-bottom: 15px;
+}
+
+.number-box {
+    font-size: 6em;
+    font-weight: bold;
+    color: #ff007f;
+    text-shadow: 0 0 20px #ff007f;
+    min-width: 200px;
+    line-height: 1;
+}
+
+.number-box.pulse {
+    animation: numberPulse 0.3s ease;
+}
+
+@keyframes numberPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* Game Status */
+.game-status {
+    text-align: center;
+    font-size: 1.3em;
+    color: #0ff;
+}
+
+.game-status p {
+    margin: 10px 0;
+}
+
+#gameMessage {
+    font-style: italic;
+    color: #ffff00;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0.5; }
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-play {
+    background: rgba(0, 255, 0, 0.1);
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.btn-play:hover:not(:disabled) {
+    background: rgba(0, 255, 0, 0.2);
+    box-shadow: 0 0 20px #00ff00;
+}
+
+.btn-stop {
+    background: rgba(255, 0, 0, 0.1);
+    border: 2px solid #ff0000;
+    color: #ff0000;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+.btn-stop:hover:not(:disabled) {
+    background: rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 20px #ff0000;
+}
+
+.btn-reset {
+    background: rgba(255, 165, 0, 0.1);
+    border: 2px solid #ffa500;
+    color: #ffa500;
+    box-shadow: 0 0 10px #ffa500;
+}
+
+.btn-reset:hover {
+    background: rgba(255, 165, 0, 0.2);
+    box-shadow: 0 0 20px #ffa500;
+}
+
+.cyberpunk-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Called Numbers Display */
+.called-numbers-container {
+    background: rgba(0, 240, 255, 0.05);
+    border: 2px solid #0ff;
+    border-radius: 15px;
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.called-numbers-container h3 {
+    color: #0ff;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.called-numbers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    gap: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.called-number {
+    background: rgba(255, 0, 127, 0.2);
+    border: 1px solid #ff007f;
+    border-radius: 8px;
+    padding: 8px 12px;
+    text-align: center;
+    color: #ff7f7f;
+    font-weight: bold;
+    font-size: 0.95em;
+    transition: all 0.2s ease;
+}
+
+.called-number:hover {
+    background: rgba(255, 0, 127, 0.4);
+    box-shadow: 0 0 8px #ff007f;
+}
+
+/* Scrollbar styling for called numbers */
+.called-numbers::-webkit-scrollbar {
+    width: 8px;
+}
+
+.called-numbers::-webkit-scrollbar-track {
+    background: rgba(0, 240, 255, 0.1);
+    border-radius: 10px;
+}
+
+.called-numbers::-webkit-scrollbar-thumb {
+    background: #0ff;
+    border-radius: 10px;
+}
+
+.called-numbers::-webkit-scrollbar-thumb:hover {
+    background: #00f0ff;
+}
+
+/* ============================================
+   PLAYER BOARDS SECTION
+   ============================================ */
+
+.player-section {
+    width: 95%;
+    max-width: 1200px;
+    background: rgba(0, 240, 255, 0.03);
+    border: 2px solid #ff007f;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+#playerCount {
+    color: #0ff;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.btn-add-player {
+    background: rgba(0, 255, 127, 0.1);
+    border: 2px solid #00ff7f;
+    color: #00ff7f;
+    box-shadow: 0 0 10px #00ff7f;
+}
+
+.btn-add-player:hover {
+    background: rgba(0, 255, 127, 0.2);
+    box-shadow: 0 0 20px #00ff7f;
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/* Player Board */
+.player-board {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid #0ff;
+    border-radius: 12px;
+    padding: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.player-board.winner {
+    background: rgba(255, 255, 0, 0.2);
+    border-color: #ffff00;
+    box-shadow: 0 0 30px #ffff00, inset 0 0 20px rgba(255, 255, 0, 0.1);
+    animation: winnerPulse 0.5s ease infinite;
+}
+
+@keyframes winnerPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.player-title {
+    text-align: center;
+    color: #0ff;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #0ff;
+}
+
+.player-board.winner .player-title {
+    color: #ffff00;
+    text-shadow: 0 0 10px #ffff00;
+}
+
+/* Player Grid */
+.player-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+/* Player Cell */
+.player-cell {
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid #0ff;
+    border-radius: 6px;
+    padding: 8px;
+    text-align: center;
+    color: #0ff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9em;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-cell:hover {
+    background: rgba(0, 240, 255, 0.2);
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+/* Marked Cell */
+.player-cell.player-marked {
+    background: #ff007f;
+    border-color: #ff007f;
+    color: #fff;
+    box-shadow: 0 0 10px #ff007f;
+}
+
+.player-cell.player-marked:hover {
+    background: #ff1f8f;
+    box-shadow: 0 0 15px #ff007f;
+}
+
+/* Scrollbar for players grid */
+.players-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.players-grid::-webkit-scrollbar-track {
+    background: rgba(0, 240, 255, 0.1);
+    border-radius: 10px;
+}
+
+.players-grid::-webkit-scrollbar-thumb {
+    background: #ff007f;
+    border-radius: 10px;
+}
+
+.players-grid::-webkit-scrollbar-thumb:hover {
+    background: #ff1f8f;
+}
+
